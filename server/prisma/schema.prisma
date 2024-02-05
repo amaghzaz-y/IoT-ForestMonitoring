@@ -9,10 +9,8 @@ datasource db {
 
 model EndDevice{
   id Int @id @default(autoincrement())
-  AppEUI String @unique
   DevEUI String @unique
   Eui String @unique
-  LastMessage DateTime
   LastSeen DateTime
   Message Message[]
   Metric Metric[]
