@@ -1,11 +1,8 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
-import { PrismaClient } from "@prisma/client";
 import "dotenv/config";
 import mqtt from "mqtt";
-import { Payload } from "./types";
-
-const prisma = new PrismaClient();
+import { Payload } from "./payload";
 
 const app = new Hono();
 
@@ -24,31 +21,10 @@ client.on("connect", () => {
   });
 });
 
-client.on("message", (topic, message) => {
+client.on("message", async (topic, message) => {
   let raw = JSON.parse(message.toString());
-  let payload: Payload = {
-    deviceId: raw["end_device_ids"]["device_id"],
-    devEui: raw["end_device_ids"]["dev_eui"],
-    receivedAt: raw["received_at"],
-    content: raw["uplink_message"]["decoded_payload"],
-  };
-  console.log(payload);
-  prisma.endDevice
-    .upsert({
-      where: {
-        Eui: payload.deviceId,
-      },
-      update: {
-        DevEUI: payload.devEui,
-        LastSeen: new Date().toISOString(),
-      },
-      create: {
-        DevEUI: payload.devEui,
-        LastSeen: new Date().toISOString(),
-        Eui: payload.deviceId,
-      },
-    })
-    .catch((e) => console.log(e));
+  let payload = new Payload(raw);
+  await payload.SaveToDatabase();
 });
 
 serve({

@@ -7,40 +7,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model EndDevice{
-  id Int @id @default(autoincrement())
-  DevEUI String @unique
-  Eui String @unique
+model EndDevice {
+  id       Int               @id @default(autoincrement())
+  DevEUI   String            @unique
+  Eui      String            @unique
   LastSeen DateTime
-  Message Message[]
-  Metric Metric[]
-  Ems EmergencySignal[]
+  Message  Message[]
+  Metric   Metric[]
+  Ems      EmergencySignal[]
 }
 
-model Message{
-  id Int @id @default(autoincrement())
-  eui String
-  payload String
-  date DateTime
+model Message {
+  id        Int       @id @default(autoincrement())
+  eui       String
+  payload   String
+  date      DateTime
   endDevice EndDevice @relation(fields: [eui], references: [Eui])
 }
 
 model Metric {
-  id Int @id @default(autoincrement())
-  eui String
+  id          Int       @id @default(autoincrement())
+  eui         String
   temperature Float
-  humidity Float
-  sound Float[]
-  movement Boolean
-  flame Boolean
-  lux Float
-  date DateTime
-  endDevice EndDevice @relation(fields: [eui], references: [Eui])
+  humidity    Float
+  sound       Int
+  movement    Boolean
+  flame       Boolean
+  lux         Float
+  date        DateTime
+  endDevice   EndDevice @relation(fields: [eui], references: [Eui])
 }
 
 model EmergencySignal {
-   id Int @id @default(autoincrement())
-  eui String
-  date DateTime
+  id        Int       @id @default(autoincrement())
+  eui       String
+  date      DateTime
   endDevice EndDevice @relation(fields: [eui], references: [Eui])
 }
