@@ -32,9 +32,7 @@ client.on("message", (topic, message) => {
     receivedAt: raw["received_at"],
     content: raw["uplink_message"]["decoded_payload"],
   };
-
   console.log(payload);
-
   prisma.endDevice
     .upsert({
       where: {

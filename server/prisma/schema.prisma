@@ -14,7 +14,7 @@ model EndDevice{
   LastSeen DateTime
   Message Message[]
   Metric Metric[]
-  Ems EMS[]
+  Ems EmergencySignal[]
 }
 
 model Message{
@@ -38,8 +38,7 @@ model Metric {
   endDevice EndDevice @relation(fields: [eui], references: [Eui])
 }
 
-// Emergency Signal
-model EMS {
+model EmergencySignal {
    id Int @id @default(autoincrement())
   eui String
   date DateTime
