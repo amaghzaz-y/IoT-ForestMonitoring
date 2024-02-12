@@ -2,11 +2,10 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client";
 import "dotenv/config";
-
-const prisma = new PrismaClient();
-
 import mqtt from "mqtt";
 import { Payload } from "./types";
+
+const prisma = new PrismaClient();
 
 const app = new Hono();
 
@@ -36,13 +35,22 @@ client.on("message", (topic, message) => {
 
   console.log(payload);
 
-  prisma.endDevice.create({
-    data: {
-      DevEUI: payload.devEui,
-      LastSeen: new Date().getTime().toString(),
-      Eui: payload.deviceId,
-    },
-  });
+  prisma.endDevice
+    .upsert({
+      where: {
+        Eui: payload.deviceId,
+      },
+      update: {
+        DevEUI: payload.devEui,
+        LastSeen: new Date().toISOString(),
+      },
+      create: {
+        DevEUI: payload.devEui,
+        LastSeen: new Date().toISOString(),
+        Eui: payload.deviceId,
+      },
+    })
+    .catch((e) => console.log(e));
 });
 
 serve({
