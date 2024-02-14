@@ -27,6 +27,13 @@ client.on("message", async (topic, message) => {
   await payload.SaveToDatabase();
 });
 
+app.get("/metrics/summary", (c) => c.text("summary"));
+app.get("/metrics/emergency", (c) => c.text("emergency"));
+app.get("/device/:eui", (c) => c.text("eui: " + c.req.param().eui));
+app.get("/device/:eui/metrics", (c) =>
+  c.text("eui-metrics: " + c.req.param().eui)
+);
+
 serve({
   fetch: app.fetch,
   port: 8080,
