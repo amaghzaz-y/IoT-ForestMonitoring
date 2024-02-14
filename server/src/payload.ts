@@ -21,18 +21,30 @@ export class Payload {
     this.EUI = raw["end_device_ids"]["device_id"];
     this.devEUI = raw["end_device_ids"]["dev_eui"];
     this.receivedAt = raw["received_at"];
-    this.content = raw["uplink_message"]["decoded_payload"]["raw"];
+    this.content = raw["uplink_message"]["decoded_payload"]["raw"].toString();
+    this.getValues(raw["uplink_message"]["decoded_payload"]);
     console.log(this.content);
   }
 
-  async SaveToDatabase() {
-    await this.upsertDevice();
-    await this.insertMessage();
-    await this.insertMetric();
-    if (this.emergency) this.insertEMS;
+  private getValues(decoded_payload: any) {
+    this.humidity = decoded_payload["humidity"];
+    this.temperature = decoded_payload["temperature"];
+    this.lux = decoded_payload["lux"];
+    this.sound = decoded_payload["sound"];
+    this.movement = decoded_payload["movement"] == 0 ? false : true;
+    this.flame = decoded_payload["flame"] == 0 ? false : true;
+    this.emergency = decoded_payload["emergency"] == 0 ? false : true;
+    console.log(this.emergency);
   }
 
-  private async upsertDevice() {
+  async SaveToDatabase() {
+    await this.insertDevice();
+    await this.insertMessage();
+    await this.insertMetric();
+    if (this.emergency) this.insertEMS();
+  }
+
+  private async insertDevice() {
     await prisma.endDevice
       .upsert({
         where: {
@@ -78,11 +90,13 @@ export class Payload {
       .catch((e) => console.log(e));
   }
   private async insertEMS() {
-    await prisma.emergencySignal.create({
-      data: {
-        date: new Date().toISOString(),
-        eui: this.EUI,
-      },
-    });
+    await prisma.emergencySignal
+      .create({
+        data: {
+          date: new Date().toISOString(),
+          eui: this.EUI,
+        },
+      })
+      .catch((e) => console.log(e));
   }
 }
