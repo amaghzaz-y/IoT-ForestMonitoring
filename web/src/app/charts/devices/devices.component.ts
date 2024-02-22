@@ -24,12 +24,32 @@ export class DevicesComponent {
   chartConstructor: string = 'chart';
   chartOptions: Highcharts.Options = {
     title: {
-      text: 'Total Devices Graph',
+      text: 'Total Devices',
     },
-    chart: {
-      backgroundColor: 'gray',
-    },
+    series: [
+      {
+        data: [
+          [0, 3],
+          [1, 5],
+          [2, 7],
+          [3, 3],
+          [4, 8],
+          [5, 10],
+          [6, 3],
+          [7, 4],
+          [8, 2],
+          [9, 2],
+          [10, 7],
+          [11, 9],
+          [12, 12],
+          [13, 7],
+          [14, 9],
+        ],
+        type: 'line',
+      },
+    ],
   };
-  updateFlag: boolean = false;
+
+  updateFlag = false;
   constructor() {}
 }

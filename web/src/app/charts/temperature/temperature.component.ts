@@ -7,7 +7,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import * as Highcharts from 'highcharts';
 
 @Component({
-  selector: 'app-messages',
+  selector: 'app-temperature',
   standalone: true,
   imports: [
     MatIconModule,
@@ -16,38 +16,47 @@ import * as Highcharts from 'highcharts';
     MatDividerModule,
     HighchartsChartModule,
   ],
-  templateUrl: './messages.component.html',
-  styleUrl: './messages.component.css',
+  templateUrl: './temperature.component.html',
+  styleUrl: './temperature.component.css',
 })
-export class MessagesComponent {
+export class TemperatureComponent {
   Highcharts: typeof Highcharts = Highcharts; // required
   chartConstructor: string = 'chart';
   chartOptions: Highcharts.Options = {
-    title: {
-      text: 'Total Messages',
-    },
-    series: [
-      {
-        data: [
-          [0, 1432],
-          [1, 1432],
-          [2, 6784],
-          [3, 3445],
-          [4, 843],
-          [5, 123],
-          [6, 3543],
-          [7, 8987],
-          [8, 2322],
-          [9, 4435],
-          [10, 5437],
-          [11, 2139],
-          [12, 5412],
-          [13, 7967],
-          [14, 4359],
-        ],
-        type: 'line',
+    chart: {
+      type: 'arearange',
+      scrollablePlotArea: {
+        minWidth: 600,
+        scrollPositionX: 1,
       },
-    ],
+    },
+    title: {
+      text: 'Temperature variation by day',
+    },
+    xAxis: {
+      type: 'datetime',
+      accessibility: {
+        rangeDescription: 'Range: Jan 1st 2017 to Dec 31 2017.',
+      },
+    },
+    yAxis: {
+      title: {
+        text: null,
+      },
+    },
+    tooltip: {
+      shared: true,
+      valueSuffix: '°C',
+      xDateFormat: '%A, %b %e',
+    },
+    legend: {
+      enabled: false,
+    },
+    // series: [
+    //   {
+    //     data: [],
+    //   },
+    // ],
   };
 
   updateFlag: any = false;

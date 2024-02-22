@@ -3,16 +3,23 @@
     <mat-card-title>Total Devices</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <h1>0.0</h1>
-    <mat-card-subtitle>Active</mat-card-subtitle>
-    <h2>0.0</h2>
-    <mat-card-subtitle>Disconnected</mat-card-subtitle>
-    <h2>0.0</h2>
+    <div>
+      <h1>13.0</h1>
+    </div>
+    <div class="info">
+      <div class="info-data">
+        <mat-card-subtitle>Active</mat-card-subtitle>
+        9.0
+      </div>
+      <div class="info-data">
+        <mat-card-subtitle>Disconnected</mat-card-subtitle>
+        4.0
+      </div>
+    </div>
     <highcharts-chart
       [Highcharts]="Highcharts"
       [constructorType]="chartConstructor"
       [options]="chartOptions"
-      [(update)]="updateFlag"
       style="width: 100%; height: 400px; display: block; border-radius: 0.2rem"
     ></highcharts-chart>
     <mat-divider></mat-divider>
