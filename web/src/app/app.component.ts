@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
-import { DevicesComponent } from './charts/devices/devices.component';
 import { MessagesComponent } from './charts/messages/messages.component';
 import { TemperatureComponent } from './charts/temperature/temperature.component';
+import { SummaryComponent } from './charts/summary/summary.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,10 @@ import { TemperatureComponent } from './charts/temperature/temperature.component
   imports: [
     RouterOutlet,
     NavbarComponent,
-    DevicesComponent,
+    SummaryComponent,
     MessagesComponent,
     TemperatureComponent,
+    NgxChartsModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

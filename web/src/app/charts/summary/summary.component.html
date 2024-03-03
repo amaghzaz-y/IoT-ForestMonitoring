@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Total Devices</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <h1>
+        Total Devices:
+        {{
+          this.metrics?.totalDevices != null ? this.metrics?.totalDevices : 0
+        }}
+      </h1>
+      <h1>
+        Total Messages:
+        {{
+          this.metrics?.totalMessages != null ? this.metrics?.totalMessages : 0
+        }}
+      </h1>
+      <h1>
+        Average Temperature:
+        {{
+          this.metrics?.temperature != null ? this.metrics?.temperature : 0.0
+        }}
+      </h1>
+    </div>
+    <ngx-charts-gauge
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="temperature"
+      [legend]="false"
+      [showAxis]="false"
+      [max]="54"
+      [min]="-40"
+      textValue="Temperature"
+      [legendPosition]="legendPosition"
+      units="Celcius"
+    >
+    </ngx-charts-gauge>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+</mat-card>
