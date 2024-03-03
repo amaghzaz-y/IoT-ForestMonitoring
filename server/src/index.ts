@@ -3,6 +3,7 @@ import { Hono } from "hono";
 import "dotenv/config";
 import mqtt from "mqtt";
 import { Payload } from "./payload";
+import { HandleDaySummary, HandleEndDevice, HandleIncidents } from "./api";
 
 const app = new Hono();
 
@@ -27,12 +28,9 @@ client.on("message", async (topic, message) => {
   await payload.SaveToDatabase();
 });
 
-app.get("/metrics/summary", (c) => c.text("summary"));
-app.get("/metrics/emergency", (c) => c.text("emergency"));
-app.get("/device/:eui", (c) => c.text("eui: " + c.req.param().eui));
-app.get("/device/:eui/metrics", (c) =>
-  c.text("eui-metrics: " + c.req.param().eui)
-);
+app.get("/metrics/day/:date", HandleDaySummary);
+app.get("/metrics/emergency", HandleIncidents);
+app.get("/metrics/:eui/:date", HandleEndDevice);
 
 serve({
   fetch: app.fetch,
