@@ -22,12 +22,12 @@ interface Incident {
 
 interface EndDeviceSummary {
   eui: string;
-  averageHumidity: number;
-  averageTemperature: number;
-  averageLux: number;
-  averageSound: number;
-  averageMovement: number;
-  averageFlame: number;
+  humidity: number;
+  temperature: number;
+  lux: number;
+  sound: number;
+  movement: number;
+  flame: number;
 }
 
 export async function getEndDevice(
@@ -78,20 +78,20 @@ export async function getEndDevice(
       if (metric.flame) totalFlame++;
     });
 
-    const averageHumidity = +(totalHumidity / totalMetrics).toFixed(2);
-    const averageTemperature = +(totalTemperature / totalMetrics).toFixed(2);
-    const averageLux = +(totalLux / totalMetrics).toFixed(2);
-    const averageSound = +(totalSound / totalMetrics).toFixed(2);
-    const averageMovement = +(totalMovement / totalMetrics).toFixed(2);
-    const averageFlame = +(totalFlame / totalMetrics).toFixed(2);
+    const humidity = +(totalHumidity / totalMetrics).toFixed(2);
+    const temperature = +(totalTemperature / totalMetrics).toFixed(2);
+    const lux = +(totalLux / totalMetrics).toFixed(2);
+    const sound = +(totalSound / totalMetrics).toFixed(2);
+    const movement = +(totalMovement / totalMetrics).toFixed(2);
+    const flame = +(totalFlame / totalMetrics).toFixed(2);
     return {
-      eui: eui,
-      averageHumidity,
-      averageTemperature,
-      averageLux,
-      averageSound,
-      averageMovement,
-      averageFlame,
+      eui,
+      humidity,
+      temperature,
+      lux,
+      sound,
+      movement,
+      flame,
     };
   } catch (error) {
     console.error("Error fetching end device summary:", error);

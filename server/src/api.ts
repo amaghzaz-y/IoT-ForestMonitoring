@@ -1,5 +1,4 @@
 import { Context } from "hono";
-import { PrismaClient } from "@prisma/client";
 import { getAllIncidents, getDaySummary, getEndDevice } from "./models";
 
 export async function HandleDaySummary(ctx: Context) {
