@@ -30,7 +30,7 @@ export class SummaryComponent {
 
   @Input() public chartData$: Observable<any[]> = new Observable();
   colorScheme: any = {
-    domain: ['black'],
+    domain: ['#28B67E'],
   };
 
   constructor(public api: DataService, private cdr: ChangeDetectorRef) {

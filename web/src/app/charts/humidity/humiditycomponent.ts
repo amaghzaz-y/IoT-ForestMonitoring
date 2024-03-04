@@ -30,7 +30,7 @@ export class HumidityComponent {
 
   @Input() public chartData$: Observable<any[]> = new Observable();
   colorScheme: any = {
-    domain: ['darkblue'],
+    domain: ['#28B67E'],
   };
 
   constructor(public api: DataService, private cdr: ChangeDetectorRef) {
