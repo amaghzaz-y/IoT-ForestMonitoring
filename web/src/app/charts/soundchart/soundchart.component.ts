@@ -66,19 +66,7 @@ export class SoundChartComponent {
   }
   processData(e: MetricsSummary) {
     let date = e.date.split('T')[0];
-    this.humidity.series.push({ name: date, value: e.humidity });
-    this.temperature.series.push({ name: date, value: e.temperature });
-    this.lux.series.push({ name: date, value: e.lux });
     this.sound.series.push({ name: date, value: e.sound });
-    this.movement.series.push({ name: date, value: e.movement });
-    this.flame.series.push({ name: date, value: e.flame });
-    this.chartData = [
-      // this.humidity,
-      // this.temperature,
-      // this.lux,
-      this.sound,
-      // this.movement,
-      // this.flame,
-    ];
+    this.chartData = [this.sound];
   }
 }
