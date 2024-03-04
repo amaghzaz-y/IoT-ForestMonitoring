@@ -17,10 +17,6 @@ mat-card h1 {
 	color: #e91e63;
 }
 
-mat-card h2 {
-	font-weight: bolder;
-}
-
 main {
 	display: flex;
 	gap: 1rem;

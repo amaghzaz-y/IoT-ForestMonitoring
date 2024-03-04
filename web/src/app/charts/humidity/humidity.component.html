@@ -1,16 +1,15 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <h2>Day Temperature</h2>
+      <h2>Humidity</h2>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div>
       <h3>
-        Average Temperature:
-        {{
-          this.metrics?.temperature != null ? this.metrics?.temperature : 0.0
-        }}°C
+        Average Humidity:
+        {{ this.metrics?.temperature != null ? this.metrics?.humidity : 0.0 }}
+        %
       </h3>
     </div>
     <ngx-charts-gauge
@@ -18,7 +17,7 @@
       [scheme]="colorScheme"
       [results]="[
         {
-          name: 'Temperature',
+          name: 'Humidity',
           value: this.metrics!.temperature
         }
       ]"
@@ -26,9 +25,8 @@
       [showAxis]="true"
       [max]="45"
       [min]="-20"
-      textValue="Temperature"
+      textValue="Humidity"
       [legendPosition]="legendPosition"
-      units="Celcius"
     >
     </ngx-charts-gauge>
     <mat-divider></mat-divider>

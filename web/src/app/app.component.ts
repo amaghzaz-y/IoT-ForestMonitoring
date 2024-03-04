@@ -5,6 +5,7 @@ import { MessagesComponent } from './charts/messages/messages.component';
 import { TemperatureComponent } from './charts/temperature/temperature.component';
 import { SummaryComponent } from './charts/summary/summary.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { HumidityComponent } from './charts/humidity/humiditycomponent';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     SummaryComponent,
     MessagesComponent,
     TemperatureComponent,
+    HumidityComponent,
     NgxChartsModule,
   ],
   templateUrl: './app.component.html',

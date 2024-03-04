@@ -9,7 +9,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Observable, interval, map } from 'rxjs';
 
 @Component({
-  selector: 'app-temperature',
+  selector: 'app-humidity',
   standalone: true,
   imports: [
     MatIconModule,
@@ -18,10 +18,10 @@ import { Observable, interval, map } from 'rxjs';
     MatDividerModule,
     NgxChartsModule,
   ],
-  templateUrl: './temperature.component.html',
-  styleUrls: ['./temperature.component.css'],
+  templateUrl: './humidity.component.html',
+  styleUrls: ['./humidity.component.css'],
 })
-export class TemperatureComponent {
+export class HumidityComponent {
   chartConstructor: string = 'chart';
   metrics: MetricsSummary | undefined;
   view: [number, number] = [500, 400];

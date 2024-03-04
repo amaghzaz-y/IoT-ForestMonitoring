@@ -2,4 +2,25 @@ mat-toolbar {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	background-color: white;
+	border-bottom: solid 2px black;
+	color: black;
+}
+
+mat-toolbar button {
+	color: black;
+	border: solid 2px black;
+	border-radius: 0;
+}
+
+mat-toolbar button:hover {
+	color: black;
+	border: solid 2px black;
+	box-shadow: 2px 2px darkblue;
+}
+
+mat-toolbar div {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
 }

@@ -7,6 +7,10 @@ body {
 
 body {
 	margin: 0;
-	font-family: Roboto, "Helvetica Neue", sans-serif;
-	background-color: rgb(8, 8, 8);
+	font-family: Montserrat, "Helvetica Neue", sans-serif;
+	background-color: white;
+}
+
+* {
+	font-family: Montserrat, "Helvetica Neue", sans-serif;
 }
