@@ -4,7 +4,7 @@ import "dotenv/config";
 import mqtt from "mqtt";
 import { Payload } from "./payload";
 import { HandleDaySummary, HandleEndDevice, HandleIncidents } from "./api";
-
+import { cors } from "hono/cors";
 const app = new Hono();
 
 let client = mqtt.connect("mqtt://eu1.cloud.thethings.network:1883", {
@@ -27,7 +27,7 @@ client.on("message", async (topic, message) => {
   let payload = new Payload(raw);
   await payload.SaveToDatabase();
 });
-
+app.get("/*", cors());
 app.get("/metrics/day/:date", HandleDaySummary);
 app.get("/metrics/emergency", HandleIncidents);
 app.get("/metrics/:eui/:date", HandleEndDevice);

@@ -53,7 +53,8 @@ export class SummaryComponent {
   ];
 
   constructor(public api: DataService) {
-    api.getDaySummary(new Date().toISOString()).subscribe((data) => {
+    api.getDaySummary('2024-02-14').subscribe((data) => {
+      console.log(data);
       this.metrics = data;
     });
   }
