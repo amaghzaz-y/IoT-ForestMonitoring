@@ -9,6 +9,7 @@ import { SoundComponent } from './charts/sound/sound.component';
 import { IncidentsComponent } from './charts/incidents/incidents.component';
 import { TempHumidComponent } from './charts/temphumid/temphumid.component';
 import { LuminanceComponent } from './charts/luminance/luminance.component';
+import { SoundChartComponent } from './charts/soundchart/soundchart.component';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,8 @@ import { LuminanceComponent } from './charts/luminance/luminance.component';
     SoundComponent,
     IncidentsComponent,
     TempHumidComponent,
-    // LuminanceComponent
+    SoundChartComponent,
+    LuminanceComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

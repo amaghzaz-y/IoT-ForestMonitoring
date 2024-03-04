@@ -8,7 +8,7 @@ import { ChartData, Incident, MetricsSummary } from '../../models';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-lux',
+  selector: 'app-sound-graph',
   standalone: true,
   imports: [
     MatIconModule,
@@ -17,10 +17,10 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatDividerModule,
     NgxChartsModule,
   ],
-  templateUrl: './luminance.component.html',
-  styleUrls: ['./luminance.component.css'],
+  templateUrl: './soundchart.component.html',
+  styleUrls: ['./soundchart.component.css'],
 })
-export class LuminanceComponent {
+export class SoundChartComponent {
   chartConstructor: string = 'chart';
   incidents: Incident[] | undefined;
   view: [number, number] = [1700, 500];
@@ -75,8 +75,8 @@ export class LuminanceComponent {
     this.chartData = [
       // this.humidity,
       // this.temperature,
-      this.lux,
-      // this.sound,
+      // this.lux,
+      this.sound,
       // this.movement,
       // this.flame,
     ];
