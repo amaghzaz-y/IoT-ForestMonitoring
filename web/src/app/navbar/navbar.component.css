@@ -24,3 +24,11 @@ mat-toolbar div {
 	align-items: center;
 	gap: 1rem;
 }
+
+mat-toolbar span {
+	display: flex;
+	align-items: center;
+	color: rgb(0, 51, 0);
+	font-weight: 800;
+	gap: 0.5rem;
+}

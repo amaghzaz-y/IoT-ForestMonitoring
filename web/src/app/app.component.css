@@ -1,0 +1,7 @@
+main {
+	margin-top: 1rem;
+	display: flex;
+	width: 100%;
+	gap: 3rem;
+	justify-content: center;
+}
