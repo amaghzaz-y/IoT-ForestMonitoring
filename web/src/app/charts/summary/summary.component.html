@@ -1,28 +1,17 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      <h2>Day Temperature</h2>
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <ngx-charts-gauge
-      [view]="view"
-      [scheme]="colorScheme"
-      [results]="[
-        {
-          name: 'Temperature',
-          value: this.metrics!.temperature
-        }
-      ]"
-      [legend]="false"
-      [showAxis]="true"
-      [max]="45"
-      [min]="-20"
-      textValue="Temperature"
-      [legendPosition]="legendPosition"
-      units="Celcius"
-    >
-    </ngx-charts-gauge>
-    <mat-divider></mat-divider>
-  </mat-card-content>
+  <div class="info">
+    <div class="info-data">
+      <h1>Hello Yassine 👋 !</h1>
+      <h2>Welcome to your daily debrief.</h2>
+    </div>
+    <div class="info-data-metrics">
+      <h2>Active Devices: {{ this.metrics?.totalDevices }}</h2>
+      <h2>Messages Received: {{ this.metrics?.totalMessages }}</h2>
+      <h2>Temperature : {{ this.metrics?.temperature }} °C</h2>
+      <h2>Humidity : {{ this.metrics?.humidity }}%</h2>
+      <h2>Noise: {{ this.metrics?.sound }} dB</h2>
+      <h2>Illuminance: {{ this.metrics?.lux }} lux</h2>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
 </mat-card>

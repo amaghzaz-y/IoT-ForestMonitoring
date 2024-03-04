@@ -16,7 +16,7 @@ mat-toolbar button {
 mat-toolbar button:hover {
 	color: black;
 	border: solid 2px black;
-	box-shadow: 2px 2px darkblue;
+	box-shadow: 2px 2px #1D4C4F;
 }
 
 mat-toolbar div {
@@ -28,7 +28,7 @@ mat-toolbar div {
 mat-toolbar span {
 	display: flex;
 	align-items: center;
-	color: rgb(0, 51, 0);
+	color: #1D4C4F;
 	font-weight: 800;
 	gap: 0.5rem;
 }

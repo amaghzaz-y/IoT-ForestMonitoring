@@ -1,11 +1,21 @@
-mat-card {
-	width: fit-content;
-	color: white;
-	background-color: white;
+main {
+	display: flex;
+	gap: 1rem;
+	padding: 1rem;
 }
 
-mat-card h2 {
-	color: #e91e63;
+mat-card {
+	width: 90vw;
+	color: #0D1321;
+	background-color: white;
+	border-radius: 0;
+	box-shadow: 10px 10px 0px rgb(97, 97, 97);
+	border: solid black;
+}
+
+mat-card h1 {
+	color: #1D4C4F;
+	font-weight: 900;
 }
 
 main {
@@ -19,7 +29,7 @@ main {
 	flex-direction: row;
 	gap: 2rem;
 	align-items: center;
-	/* justify-content: center; */
+	justify-content: space-around;
 }
 
 .info-data {
@@ -28,6 +38,16 @@ main {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding-block: 1rem;
-	font-size: 2rem;
+	padding: 1rem;
+	flex-wrap: wrap;
+}
+
+.info-data-metrics {
+	display: flex;
+	max-width: 40%;
+	column-gap: 3rem;
+	padding: 0.5rem;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: end;
 }
