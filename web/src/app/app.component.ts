@@ -7,6 +7,7 @@ import { SummaryComponent } from './charts/summary/summary.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HumidityComponent } from './charts/humidity/humiditycomponent';
 import { SoundComponent } from './charts/sound/sound.component';
+import { IncidentsComponent } from './charts/incidents/incidents.component';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ import { SoundComponent } from './charts/sound/sound.component';
     HumidityComponent,
     NgxChartsModule,
     SoundComponent,
+    IncidentsComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

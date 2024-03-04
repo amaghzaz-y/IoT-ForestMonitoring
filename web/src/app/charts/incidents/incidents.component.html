@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Incidents Reported</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <h2 style="color: black">
+        Total Incidents:
+        {{ this.incidents != null ? this.incidents.length : 0.0 }} Incidents
+        Reported.
+      </h2>
+      <div *ngFor="let incident of incidents">
+        <span
+          style="
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid black;
+          "
+        >
+          <h3 style="color: black">
+            EUI :
+            {{ incident.id }}
+          </h3>
+          <h3 style="color: black">
+            Date :
+            {{ incident.date }}
+          </h3>
+          <h3 style="color: black">Location : N40° 44.9064', W073° 59.0735</h3>
+          <button class="btn" color="primary">Map</button>
+        </span>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+</mat-card>
