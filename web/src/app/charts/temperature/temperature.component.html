@@ -1,27 +1,151 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Temperature</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div>
-      <h1>56.6k</h1>
-    </div>
-    <div class="info">
-      <div class="info-data">
-        <mat-card-subtitle>Received</mat-card-subtitle>
-        56.3k
+<main>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Total Devices</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <h1>
+          Total Devices:
+          {{
+            this.metrics?.totalDevices != null ? this.metrics?.totalDevices : 0
+          }}
+        </h1>
+        <h1>
+          Total Messages:
+          {{
+            this.metrics?.totalMessages != null
+              ? this.metrics?.totalMessages
+              : 0
+          }}
+        </h1>
+        <h1>
+          Average Temperature:
+          {{
+            this.metrics?.temperature != null ? this.metrics?.temperature : 0.0
+          }}
+        </h1>
       </div>
-      <div class="info-data">
-        <mat-card-subtitle>Sent</mat-card-subtitle>
-        2.3k
+      <ngx-charts-gauge
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="[
+          {
+            name: 'Temperature',
+            value: this.metrics!.temperature
+          }
+        ]"
+        [legend]="false"
+        [showAxis]="true"
+        [max]="45"
+        [min]="-20"
+        textValue="Temperature"
+        [legendPosition]="legendPosition"
+        units="Celcius"
+      >
+      </ngx-charts-gauge>
+      <ngx-charts-gauge
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="[
+          {
+            name: 'Humidity',
+            value: this.metrics!.humidity
+          }
+        ]"
+        [legend]="false"
+        [showAxis]="true"
+        [max]="100"
+        [min]="0"
+        textValue="Humidity"
+        [legendPosition]="legendPosition"
+      >
+      </ngx-charts-gauge>
+      <ngx-charts-gauge
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="[
+          {
+            name: 'Lux',
+            value: this.metrics!.lux
+          }
+        ]"
+        [legend]="false"
+        [showAxis]="true"
+        [max]="100"
+        [min]="0"
+        textValue="Illuminance"
+        [legendPosition]="legendPosition"
+        units="Lux"
+      >
+      </ngx-charts-gauge>
+      <ngx-charts-gauge
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="[
+          {
+            name: 'Sound',
+            value: this.metrics!.sound
+          }
+        ]"
+        [legend]="false"
+        [showAxis]="true"
+        [max]="100"
+        [min]="0"
+        textValue="Sound Level"
+        [legendPosition]="legendPosition"
+        units="dB"
+      >
+      </ngx-charts-gauge>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Total Devices</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <h1>
+          Total Devices:
+          {{
+            this.metrics?.totalDevices != null ? this.metrics?.totalDevices : 0
+          }}
+        </h1>
+        <h1>
+          Total Messages:
+          {{
+            this.metrics?.totalMessages != null
+              ? this.metrics?.totalMessages
+              : 0
+          }}
+        </h1>
+        <h1>
+          Average Temperature:
+          {{
+            this.metrics?.temperature != null ? this.metrics?.temperature : 0.0
+          }}
+        </h1>
       </div>
-    </div>
-    <highcharts-chart
-      [Highcharts]="Highcharts"
-      [constructorType]="chartConstructor"
-      [options]="chartOptions"
-      style="width: 100%; height: 400px; display: block; border-radius: 0.2rem"
-    ></highcharts-chart>
-    <mat-divider></mat-divider>
-  </mat-card-content>
-</mat-card>
+
+      <ngx-charts-gauge
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="[
+          {
+            name: 'Humidity',
+            value: this.metrics!.humidity
+          }
+        ]"
+        [legend]="false"
+        [showAxis]="true"
+        [max]="100"
+        [min]="0"
+        textValue="Humidity"
+        [legendPosition]="legendPosition"
+      >
+      </ngx-charts-gauge>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+  </mat-card>
+</main>

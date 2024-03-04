@@ -1,36 +1,23 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Total Devices</mat-card-title>
+    <mat-card-title>
+      <h2>Day Temperature</h2>
+    </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div>
-      <h1>
-        Total Devices:
-        {{
-          this.metrics?.totalDevices != null ? this.metrics?.totalDevices : 0
-        }}
-      </h1>
-      <h1>
-        Total Messages:
-        {{
-          this.metrics?.totalMessages != null ? this.metrics?.totalMessages : 0
-        }}
-      </h1>
-      <h1>
-        Average Temperature:
-        {{
-          this.metrics?.temperature != null ? this.metrics?.temperature : 0.0
-        }}
-      </h1>
-    </div>
     <ngx-charts-gauge
       [view]="view"
       [scheme]="colorScheme"
-      [results]="temperature"
+      [results]="[
+        {
+          name: 'Temperature',
+          value: this.metrics!.temperature
+        }
+      ]"
       [legend]="false"
-      [showAxis]="false"
-      [max]="54"
-      [min]="-40"
+      [showAxis]="true"
+      [max]="45"
+      [min]="-20"
       textValue="Temperature"
       [legendPosition]="legendPosition"
       units="Celcius"

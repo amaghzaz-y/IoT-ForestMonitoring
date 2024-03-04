@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import { HighchartsChartModule } from 'highcharts-angular';
-import * as Highcharts from 'highcharts';
+import { DataService } from '../../services/data.service';
+import { MetricsSummary } from '../../models';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Observable, interval, map } from 'rxjs';
 
 @Component({
   selector: 'app-temperature',
@@ -14,51 +16,27 @@ import * as Highcharts from 'highcharts';
     MatButtonModule,
     MatCardModule,
     MatDividerModule,
-    HighchartsChartModule,
+    NgxChartsModule,
   ],
   templateUrl: './temperature.component.html',
   styleUrl: './temperature.component.css',
 })
 export class TemperatureComponent {
-  Highcharts: typeof Highcharts = Highcharts; // required
   chartConstructor: string = 'chart';
-  chartOptions: Highcharts.Options = {
-    chart: {
-      type: 'arearange',
-      scrollablePlotArea: {
-        minWidth: 600,
-        scrollPositionX: 1,
-      },
-    },
-    title: {
-      text: 'Temperature variation by day',
-    },
-    xAxis: {
-      type: 'datetime',
-      accessibility: {
-        rangeDescription: 'Range: Jan 1st 2017 to Dec 31 2017.',
-      },
-    },
-    yAxis: {
-      title: {
-        text: null,
-      },
-    },
-    tooltip: {
-      shared: true,
-      valueSuffix: '°C',
-      xDateFormat: '%A, %b %e',
-    },
-    legend: {
-      enabled: false,
-    },
-    // series: [
-    //   {
-    //     data: [],
-    //   },
-    // ],
+  metrics: MetricsSummary | undefined;
+  view: [number, number] = [500, 400];
+  legend: boolean = true;
+  legendPosition: any = 'center';
+
+  @Input() public chartData$: Observable<any[]> = new Observable();
+  colorScheme: any = {
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
   };
 
-  updateFlag: any = false;
-  constructor() {}
+  constructor(public api: DataService, private cdr: ChangeDetectorRef) {
+    api.getDaySummary('2024-02-14').subscribe((data) => {
+      console.log(data);
+      this.metrics = data;
+    });
+  }
 }

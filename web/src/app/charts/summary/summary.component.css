@@ -4,8 +4,14 @@ mat-card {
 	background-color: white;
 }
 
-mat-card h1 {
+mat-card h2 {
 	color: #e91e63;
+}
+
+main {
+	display: flex;
+	gap: 1rem;
+	padding: 1rem;
 }
 
 .info {
