@@ -34,8 +34,7 @@ export class HumidityComponent {
   };
 
   constructor(public api: DataService, private cdr: ChangeDetectorRef) {
-    api.getDaySummary('2024-02-14').subscribe((data) => {
-      console.log(data);
+    api.getDaySummary(new Date().toISOString()).subscribe((data) => {
       this.metrics = data;
     });
   }

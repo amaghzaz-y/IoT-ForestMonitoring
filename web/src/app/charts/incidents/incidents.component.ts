@@ -27,6 +27,7 @@ export class IncidentsComponent {
   view: [number, number] = [500, 400];
   legend: boolean = true;
   legendPosition: any = 'center';
+  math = Math;
 
   @Input() public chartData$: Observable<any[]> = new Observable();
   colorScheme: any = {
@@ -35,7 +36,6 @@ export class IncidentsComponent {
 
   constructor(public api: DataService, private cdr: ChangeDetectorRef) {
     api.getAllIncidents().subscribe((data) => {
-      console.log(data);
       this.incidents = data;
     });
   }

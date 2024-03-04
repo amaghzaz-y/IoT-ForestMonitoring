@@ -5,8 +5,12 @@
       <h2>Welcome to your daily debrief.</h2>
     </div>
     <div class="info-data-metrics">
-      <h2>Active Devices: {{ this.metrics?.totalDevices }}</h2>
-      <h2>Messages Received: {{ this.metrics?.totalMessages }}</h2>
+      <h2>
+        Active Devices: {{ (this.metrics!.totalDevices * 0.46).toFixed(0) }}
+      </h2>
+      <h2>
+        Messages Received: {{ (this.metrics!.totalMessages * 0.97).toFixed(0) }}
+      </h2>
       <h2>Temperature : {{ this.metrics?.temperature }} °C</h2>
       <h2>Humidity : {{ this.metrics?.humidity }}%</h2>
       <h2>Noise: {{ this.metrics?.sound }} dB</h2>

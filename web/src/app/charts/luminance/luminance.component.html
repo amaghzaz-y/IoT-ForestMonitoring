@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Illuminance (Last 7 days)</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content
+    ><ngx-charts-line-chart
+      [view]="view"
+      [scheme]="colorScheme"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [timeline]="timeline"
+      [results]="chartData"
+    >
+    </ngx-charts-line-chart>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+</mat-card>

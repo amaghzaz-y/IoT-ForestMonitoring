@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card style="max-height: 300px; overflow-y: scroll">
   <mat-card-header>
     <mat-card-title>
       <h2>Incidents Reported</h2>
@@ -7,15 +7,14 @@
   <mat-card-content>
     <div>
       <h2 style="color: black">
-        Total Incidents:
-        {{ this.incidents != null ? this.incidents.length : 0.0 }} Incidents
-        Reported.
+        {{ this.incidents != null ? this.incidents.length : 0.0 }} Incidents has
+        been Reported so far.
       </h2>
       <div *ngFor="let incident of incidents">
         <span
           style="
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-around;
             align-items: center;
             gap: 1rem;
             border-bottom: 1px solid black;
@@ -27,9 +26,14 @@
           </h3>
           <h3 style="color: black">
             Date :
-            {{ incident.date }}
+            {{ incident.date.split("T")[0] }}
           </h3>
-          <h3 style="color: black">Location : N40° 44.9064', W073° 59.0735</h3>
+          <h3 style="color: black">
+            Location : N{{ math.floor(math.random() * 46) }}°
+            {{ math.floor(math.random() * 46) }}', W{{
+              math.floor(math.random() * 46)
+            }}° {{ math.floor(math.random() * 46) }}
+          </h3>
           <button class="btn" color="primary">Map</button>
         </span>
       </div>

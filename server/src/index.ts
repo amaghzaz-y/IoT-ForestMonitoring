@@ -5,6 +5,7 @@ import mqtt from "mqtt";
 import { Payload } from "./payload";
 import { HandleDaySummary, HandleEndDevice, HandleIncidents } from "./api";
 import { cors } from "hono/cors";
+
 const app = new Hono();
 
 let client = mqtt.connect("mqtt://eu1.cloud.thethings.network:1883", {
@@ -12,7 +13,6 @@ let client = mqtt.connect("mqtt://eu1.cloud.thethings.network:1883", {
   password: process.env.TTN_MQTT,
   protocolVersion: 3,
 });
-
 client.on("connect", () => {
   client.subscribe("#", (err) => {
     if (err) {
