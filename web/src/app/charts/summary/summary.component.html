@@ -6,15 +6,17 @@
     </div>
     <div class="info-data-metrics">
       <h2>
-        Active Devices: {{ (this.metrics!.totalDevices * 0.46).toFixed(0) }}
+        Active Devices:
+        {{ (this.api.metrics?.totalDevices ?? 0 * 0.46).toFixed(0) }}
       </h2>
       <h2>
-        Messages Received: {{ (this.metrics!.totalMessages * 0.97).toFixed(0) }}
+        Messages Received:
+        {{ (this.api.metrics?.totalMessages ?? 0 * 0.97).toFixed(0) }}
       </h2>
-      <h2>Temperature : {{ this.metrics?.temperature }} °C</h2>
-      <h2>Humidity : {{ this.metrics?.humidity }}%</h2>
-      <h2>Noise: {{ this.metrics?.sound }} dB</h2>
-      <h2>Illuminance: {{ this.metrics?.lux }} lux</h2>
+      <h2>Temperature : {{ this.api.metrics?.temperature ?? 0 }} °C</h2>
+      <h2>Humidity : {{ this.api.metrics?.humidity ?? 0 }}%</h2>
+      <h2>Noise: {{ this.api.metrics?.sound ?? 0 }} dB</h2>
+      <h2>Illuminance: {{ this.api.metrics?.lux ?? 0 }} lux</h2>
     </div>
   </div>
   <mat-divider></mat-divider>

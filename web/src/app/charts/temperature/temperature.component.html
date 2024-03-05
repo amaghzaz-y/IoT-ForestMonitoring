@@ -8,9 +8,7 @@
     <div>
       <h3>
         Average Temperature:
-        {{
-          this.metrics?.temperature != null ? this.metrics?.temperature : 0.0
-        }}°C
+        {{ this.api.metrics?.temperature ?? 0 }}°C
       </h3>
     </div>
     <ngx-charts-gauge
@@ -19,11 +17,12 @@
       [results]="[
         {
           name: 'Temperature',
-          value: this.metrics!.temperature
+          value: this.api.metrics?.temperature ?? 0
         }
       ]"
       [legend]="false"
       [showAxis]="true"
+      aria-label="hello"
       [max]="45"
       [min]="-20"
       textValue="Temperature"

@@ -5,7 +5,8 @@ import mqtt from "mqtt";
 import { Payload } from "./payload";
 import { HandleDaySummary, HandleEndDevice, HandleIncidents } from "./api";
 import { cors } from "hono/cors";
-
+import { MockRealtime } from "./add_data";
+import { logger } from "hono/logger";
 const app = new Hono();
 
 let client = mqtt.connect("mqtt://eu1.cloud.thethings.network:1883", {
@@ -18,15 +19,18 @@ client.on("connect", () => {
     if (err) {
       console.log(err);
     }
-    console.log("connected to TTN !");
   });
 });
+
+setInterval(MockRealtime, 8000);
 
 client.on("message", async (topic, message) => {
   let raw = JSON.parse(message.toString());
   let payload = new Payload(raw);
   await payload.SaveToDatabase();
 });
+
+app.use(logger());
 app.get("/*", cors());
 app.get("/metrics/day/:date", HandleDaySummary);
 app.get("/metrics/emergency", HandleIncidents);

@@ -23,19 +23,12 @@ import { Observable, interval, map } from 'rxjs';
 })
 export class HumidityComponent {
   chartConstructor: string = 'chart';
-  metrics: MetricsSummary | undefined;
   view: [number, number] = [500, 400];
   legend: boolean = true;
   legendPosition: any = 'center';
-
-  @Input() public chartData$: Observable<any[]> = new Observable();
   colorScheme: any = {
     domain: ['#28B67E'],
   };
 
-  constructor(public api: DataService, private cdr: ChangeDetectorRef) {
-    api.getDaySummary(new Date().toISOString()).subscribe((data) => {
-      this.metrics = data;
-    });
-  }
+  constructor(public api: DataService, private cdr: ChangeDetectorRef) {}
 }
