@@ -22,7 +22,7 @@ client.on("connect", () => {
   });
 });
 
-setInterval(MockRealtime, 8000);
+setInterval(MockRealtime, 2000);
 
 client.on("message", async (topic, message) => {
   let raw = JSON.parse(message.toString());

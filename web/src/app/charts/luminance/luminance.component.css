@@ -7,7 +7,7 @@ main {
 mat-card {
 	width: 90vw;
 	min-height: 30rem;
-	color: #850b20;
+	color: rgb(70, 70, 70);
 	background-color: white;
 	border-radius: 0;
 	box-shadow: 10px 10px 0px rgb(97, 97, 97);

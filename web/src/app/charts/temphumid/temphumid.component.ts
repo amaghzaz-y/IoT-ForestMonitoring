@@ -55,14 +55,14 @@ export class TempHumidComponent {
     const daysInWeek = 7;
     for (let i = 0; i < daysInWeek; i++) {
       const currentDate = new Date(today);
-      currentDate.setDate(today.getDate() - i); // Increment date by i days
+      currentDate.setDate(today.getDate() - i);
       this.api.getDaySummary(currentDate.toISOString()).subscribe((data) => {
         if (this.chartData) {
           this.processData(data);
-          console.log(this.chartData?.length);
         }
       });
     }
+    5;
   }
   processData(e: MetricsSummary) {
     let date = e.date.split('T')[0];
@@ -72,13 +72,6 @@ export class TempHumidComponent {
     this.sound.series.push({ name: date, value: e.sound });
     this.movement.series.push({ name: date, value: e.movement });
     this.flame.series.push({ name: date, value: e.flame });
-    this.chartData = [
-      this.humidity,
-      this.temperature,
-      // this.lux,
-      // this.sound,
-      // this.movement,
-      // this.flame,
-    ];
+    this.chartData = [this.humidity, this.temperature];
   }
 }
