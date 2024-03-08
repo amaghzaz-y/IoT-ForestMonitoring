@@ -7,27 +7,28 @@ import { HandleDaySummary, HandleEndDevice, HandleIncidents } from "./api";
 import { cors } from "hono/cors";
 import { MockRealtime } from "./add_data";
 import { logger } from "hono/logger";
+
 const app = new Hono();
 
-let client = mqtt.connect("mqtt://eu1.cloud.thethings.network:1883", {
-  username: process.env.TTN_USER,
-  password: process.env.TTN_MQTT,
-  protocolVersion: 3,
+const client = mqtt.connect("mqtt://eu1.cloud.thethings.network:1883", {
+	username: process.env.TTN_USER,
+	password: process.env.TTN_MQTT,
+	protocolVersion: 3,
 });
 client.on("connect", () => {
-  client.subscribe("#", (err) => {
-    if (err) {
-      console.log(err);
-    }
-  });
+	client.subscribe("#", (err) => {
+		if (err) {
+			console.log(err);
+		}
+	});
 });
 
 setInterval(MockRealtime, 2000);
 
 client.on("message", async (topic, message) => {
-  let raw = JSON.parse(message.toString());
-  let payload = new Payload(raw);
-  await payload.SaveToDatabase();
+	const raw = JSON.parse(message.toString());
+	const payload = new Payload(raw);
+	await payload.SaveToDatabase();
 });
 
 app.use(logger());
@@ -37,6 +38,6 @@ app.get("/metrics/emergency", HandleIncidents);
 app.get("/metrics/:eui/:date", HandleEndDevice);
 
 serve({
-  fetch: app.fetch,
-  port: 8080,
+	fetch: app.fetch,
+	port: 8080,
 });
