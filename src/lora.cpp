@@ -26,7 +26,7 @@ void Lora::begin() {
 void Lora::send(int *data) {
   modem.beginPacket();
   modem.write(data);
-  if (modem.endPacket(true))
+  if (!modem.endPacket(true))
     Serial.println("failed to send data");
   modem.flush();
 }

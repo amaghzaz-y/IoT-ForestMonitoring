@@ -9,11 +9,11 @@ void Sensors::readSensorFlame() {
 }
 
 void Sensors::readSensorHumidity() {
-  humiditySensorRead = dht.readHumidity(false);
+  humiditySensorRead = static_cast<int>(dht.readHumidity(false));
 }
 
 void Sensors::readSensorTemperature() {
-  temperatureSensorRead = dht.readTemperature(false);
+  temperatureSensorRead = static_cast<int>(dht.readTemperature(false));
 }
 
 void Sensors::readSensorLight() {
@@ -27,17 +27,37 @@ void Sensors::readSensorSound() {
 void Sensors::readSensorMovement() { movementSensorRead = 0.0f; }
 
 void Sensors::update() {
+  if (dht.read()) {
+    readSensorHumidity();
+    readSensorTemperature();
+  }
   readSensorFlame();
-  readSensorHumidity();
-  readSensorTemperature();
   readSensorSound();
   readSensorLight();
   data[0] = temperatureSensorRead;
   data[1] = humiditySensorRead;
-  data[2] = flameSensorRead;
-  data[3] = lightSensorRead;
+  data[2] = flameSensorRead; // works
+  data[3] = lightSensorRead; // works
   data[4] = movementSensorRead;
   data[5] = soundSensorRead;
+  data[6] = digitalRead(PIN_BUTTON);
+  if (data[6] == HIGH) {
+    digitalWrite(PIN_LED_GREEN, HIGH);
+    delay(500);
+    digitalWrite(PIN_LED_GREEN, LOW);
+  }
+  Serial.print(data[0]);
+  Serial.print(",");
+  Serial.print(data[1]);
+  Serial.print(",");
+  Serial.print(data[2]);
+  Serial.print(",");
+  Serial.print(data[3]);
+  Serial.print(",");
+  Serial.print(data[4]);
+  Serial.print(",");
+  Serial.println(data[5]);
+  Serial.println();
 }
 
 int *Sensors::getData() { return data; }

@@ -1,7 +1,10 @@
 #pragma once
-#define PIN_SENSOR_LIGHT 1
-#define PIN_SENSOR_SOUND 2
-#define PIN_SENSOR_FLAME 3
-#define PIN_SENSOR_MOVEMEMT 4
-#define PIN_SENSOR_DHT 2
+#define PIN_SENSOR_LIGHT 2
+#define PIN_SENSOR_SOUND 3
+#define PIN_SENSOR_FLAME 1
+#define PIN_SENSOR_MOVEMEMT 7
+#define PIN_SENSOR_DHT 0
+#define PIN_BUTTON 6
+#define PIN_LED_BLUE 8
+#define PIN_LED_GREEN 9
 #define DHTTYPE DHT11

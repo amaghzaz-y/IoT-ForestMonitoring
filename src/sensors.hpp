@@ -4,12 +4,12 @@
 
 class Sensors {
 protected:
-  int flameSensorRead = 0.0f;
-  int soundSensorRead = 0.0f;
-  int lightSensorRead = 0.0f;
-  int movementSensorRead = 0.0f;
-  int temperatureSensorRead = 0.0f;
-  int humiditySensorRead = 0.0f;
+  int flameSensorRead = 0;
+  int soundSensorRead = 0;
+  int lightSensorRead = 0;
+  int movementSensorRead = 0;
+  int temperatureSensorRead = 0;
+  int humiditySensorRead = 0;
   int data[6];
 
 public:
