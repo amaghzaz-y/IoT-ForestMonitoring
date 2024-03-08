@@ -6,7 +6,7 @@ import { Incident, MetricsSummary } from "../models";
 
 @Injectable({ providedIn: "root" })
 export class DataService {
-	url = "http://node:8080";
+	url = "http://10.19.5.15:8080";
 	private metricsSubject = new BehaviorSubject<MetricsSummary>(
 		{} as MetricsSummary,
 	);
