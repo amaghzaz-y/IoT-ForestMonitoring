@@ -8,11 +8,11 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: mydb
     ports:
-      - "6500:5432"
+      - "5432:5432"
 
   nodejs:
     image: node:latest
-    entrypoint: ["bin/bash", "-c"]
+    restart: always
     ports:
       - "8080:8080"
     networks:
