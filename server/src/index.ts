@@ -15,11 +15,15 @@ const client = mqtt.connect("mqtt://eu1.cloud.thethings.network:1883", {
 	password: process.env.TTN_MQTT,
 	protocolVersion: 3,
 });
+
+console.log("server started successfully !");
+
 client.on("connect", () => {
 	client.subscribe("#", (err) => {
 		if (err) {
 			console.log(err);
 		}
+		console.log("connected successfully to MQTT !");
 	});
 });
 
@@ -36,6 +40,8 @@ app.get("/*", cors());
 app.get("/metrics/day/:date", HandleDaySummary);
 app.get("/metrics/emergency", HandleIncidents);
 app.get("/metrics/:eui/:date", HandleEndDevice);
+
+console.log("server started successfully !");
 
 serve({
 	fetch: app.fetch,
