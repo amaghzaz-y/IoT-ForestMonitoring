@@ -12,7 +12,7 @@ services:
 
   nodejs:
     image: node:latest
-    entrypoint: ["bin/bash"]
+    entrypoint: ["bin/bash", "-c"]
     ports:
       - "8080:8080"
     networks:
