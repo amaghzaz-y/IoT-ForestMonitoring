@@ -1,19 +1,27 @@
 #include "sensors.hpp"
 
-DHT dht(PIN_SENSOR_DHT, DHTTYPE);
+DHT dht(A0, DHTTYPE);
 
-void Sensors::begin() { dht.begin(); }
+void Sensors::begin() {
+  dht.begin();
+  pinMode(A0, INPUT);
+  pinMode(PIN_LED_GREEN, OUTPUT);
+  pinMode(PIN_LED_BLUE, OUTPUT);
+  pinMode(PIN_BUTTON, INPUT);
+  pinMode(PIN_SENSOR_MOVEMEMT, INPUT);
+  randomSeed(analogRead(0));
+}
 
 void Sensors::readSensorFlame() {
   flameSensorRead = analogRead(PIN_SENSOR_FLAME);
 }
 
 void Sensors::readSensorHumidity() {
-  humiditySensorRead = static_cast<int>(dht.readHumidity(false));
+  humiditySensorRead = dht.readHumidity(true);
 }
 
 void Sensors::readSensorTemperature() {
-  temperatureSensorRead = static_cast<int>(dht.readTemperature(false));
+  temperatureSensorRead = dht.readTemperature(true);
 }
 
 void Sensors::readSensorLight() {
@@ -36,28 +44,43 @@ void Sensors::update() {
   readSensorLight();
   data[0] = temperatureSensorRead;
   data[1] = humiditySensorRead;
-  data[2] = flameSensorRead; // works
-  data[3] = lightSensorRead; // works
+  data[2] = flameSensorRead;
+  data[3] = lightSensorRead;
   data[4] = movementSensorRead;
   data[5] = soundSensorRead;
   data[6] = digitalRead(PIN_BUTTON);
-  if (data[6] == HIGH) {
-    digitalWrite(PIN_LED_GREEN, HIGH);
-    delay(500);
-    digitalWrite(PIN_LED_GREEN, LOW);
-  }
-  Serial.print(data[0]);
-  Serial.print(",");
-  Serial.print(data[1]);
-  Serial.print(",");
-  Serial.print(data[2]);
-  Serial.print(",");
-  Serial.print(data[3]);
-  Serial.print(",");
-  Serial.print(data[4]);
-  Serial.print(",");
-  Serial.println(data[5]);
-  Serial.println();
 }
 
 int *Sensors::getData() { return data; }
+
+int *Sensors::getDevData() {
+  data[0] = random(10, 15);
+  data[1] = random(20, 40);
+  data[2] = random(0, 1);
+  data[3] = random(0, 1000);
+  data[4] = random(0, 2);
+  data[5] = random(0, 1000);
+  data[6] = !digitalRead(PIN_BUTTON);
+  if (data[6]) {
+    digitalWrite(PIN_LED_GREEN, HIGH);
+    delay(400);
+    digitalWrite(PIN_LED_GREEN, LOW);
+  }
+  // debug print
+  if (false) {
+    Serial.print(data[0]);
+    Serial.print(",");
+    Serial.print(data[1]);
+    Serial.print(",");
+    Serial.print(data[2]);
+    Serial.print(",");
+    Serial.print(data[3]);
+    Serial.print(",");
+    Serial.print(data[4]);
+    Serial.print(",");
+    Serial.print(data[5]);
+    Serial.print(",");
+    Serial.println(data[6]);
+  }
+  return data;
+}

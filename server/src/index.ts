@@ -35,7 +35,7 @@ client.on("message", async (topic, message) => {
 	await payload.SaveToDatabase();
 });
 
-app.use(logger());
+app.use("*", logger());
 app.get("/*", cors());
 app.get("/metrics/day/:date", HandleDaySummary);
 app.get("/metrics/emergency", HandleIncidents);

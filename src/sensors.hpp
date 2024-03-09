@@ -8,14 +8,15 @@ protected:
   int soundSensorRead = 0;
   int lightSensorRead = 0;
   int movementSensorRead = 0;
-  int temperatureSensorRead = 0;
-  int humiditySensorRead = 0;
+  float temperatureSensorRead = 0.0f;
+  float humiditySensorRead = 0.0f;
   int data[6];
 
 public:
   void begin();
   void update();
   int *getData();
+  int *getDevData();
 
 private:
   void readSensorFlame();

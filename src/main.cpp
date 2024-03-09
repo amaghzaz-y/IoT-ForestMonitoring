@@ -14,6 +14,7 @@ void setup() {
 
 void loop() {
   sensors.update();
-  lora.send(sensors.getData());
-  delay(5000);
+  sensors.getDevData();
+  lora.send(sensors.getDevData());
+  delay(1000);
 }
