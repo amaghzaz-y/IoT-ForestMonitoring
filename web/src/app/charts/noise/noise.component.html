@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <h2>Average Noise (Last 7 Days)</h2>
+      <h2>Realtime Noise Data (last 50 data received)</h2>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content
@@ -11,13 +11,13 @@
       [legend]="legend"
       [showXAxisLabel]="showXAxisLabel"
       [showYAxisLabel]="showYAxisLabel"
-      [autoScale]="true"
       [xAxis]="xAxis"
       [yAxis]="yAxis"
       [xAxisLabel]="xAxisLabel"
       [yAxisLabel]="yAxisLabel"
-      [timeline]="timeline"
+      [timeline]="true"
       [results]="chartData"
+      [autoScale]="true"
     >
     </ngx-charts-line-chart>
     <mat-divider></mat-divider>

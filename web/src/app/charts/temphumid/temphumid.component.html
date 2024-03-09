@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <h2>Temperature & Humidity (Last 7 days)</h2>
+      <h2>Average Temperature & Humidity (Last 7 days)</h2>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content
@@ -15,7 +15,7 @@
       [yAxis]="yAxis"
       [xAxisLabel]="xAxisLabel"
       [yAxisLabel]="yAxisLabel"
-      [timeline]="timeline"
+      [timeline]="true"
       [results]="chartData"
     >
     </ngx-charts-line-chart>

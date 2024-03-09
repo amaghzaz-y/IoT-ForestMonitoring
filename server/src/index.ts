@@ -3,13 +3,17 @@ import { Hono } from "hono";
 import "dotenv/config";
 import mqtt from "mqtt";
 import { Payload } from "./payload";
-import { HandleDaySummary, HandleEndDevice, HandleIncidents } from "./api";
+import {
+	HandleDaySummary,
+	HandleEndDevice,
+	HandleIncidents,
+	HandleLastData,
+} from "./api";
 import { cors } from "hono/cors";
-import { MockRealtime } from "./add_data";
+import { MockRealtime, addDataToDatabase } from "./add_data";
 import { logger } from "hono/logger";
 
 const app = new Hono();
-
 const client = mqtt.connect("mqtt://eu1.cloud.thethings.network:1883", {
 	username: process.env.TTN_USER,
 	password: process.env.TTN_MQTT,
@@ -37,9 +41,10 @@ client.on("message", async (topic, message) => {
 
 app.use("*", logger());
 app.get("/*", cors());
-app.get("/metrics/day/:date", HandleDaySummary);
-app.get("/metrics/emergency", HandleIncidents);
-app.get("/metrics/:eui/:date", HandleEndDevice);
+app.get("/api/metrics/day/:date", HandleDaySummary);
+app.get("/api/metrics/emergency", HandleIncidents);
+app.get("/api/metrics/last/50", HandleLastData);
+app.get("/api/metrics/:eui/:date", HandleEndDevice);
 
 console.log("server started successfully !");
 

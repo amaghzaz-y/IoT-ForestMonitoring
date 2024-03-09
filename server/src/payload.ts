@@ -17,23 +17,25 @@ export class Payload {
 	private sound = 0.0;
 	private emergency = false;
 
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	constructor(raw: any) {
-		this.EUI = raw["end_device_ids"]["device_id"];
-		this.devEUI = raw["end_device_ids"]["dev_eui"];
+		this.EUI = raw.end_device_ids.device_id;
+		this.devEUI = raw.end_device_ids.dev_eui;
 		this.receivedAt = raw.received_at;
-		this.content = raw.uplink_message.decoded_payload["raw"].toString();
+		this.content = raw.uplink_message.decoded_payload.raw.toString();
 		this.getValues(raw.uplink_message.decoded_payload);
 		console.log(this.content);
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	private getValues(decoded_payload: any) {
-		this.humidity = decoded_payload["humidity"];
-		this.temperature = decoded_payload["temperature"];
-		this.lux = decoded_payload["lux"];
-		this.sound = decoded_payload["sound"];
-		this.movement = decoded_payload["movement"] == 0 ? false : true;
-		this.flame = decoded_payload["flame"] == 0 ? false : true;
-		this.emergency = decoded_payload["emergency"] == 0 ? false : true;
+		this.humidity = decoded_payload.humidity;
+		this.temperature = decoded_payload.temperature;
+		this.lux = decoded_payload.lux;
+		this.sound = decoded_payload.sound;
+		this.movement = decoded_payload.movement === 0 ? false : true;
+		this.flame = decoded_payload.flame === 0 ? false : true;
+		this.emergency = decoded_payload.emergency === 0 ? false : true;
 		console.log(this.emergency);
 	}
 

@@ -1,5 +1,10 @@
 import { Context } from "hono";
-import { getAllIncidents, getDaySummary, getEndDevice } from "./models";
+import {
+	getAllIncidents,
+	getDaySummary,
+	getEndDevice,
+	getLastData,
+} from "./models";
 
 export async function HandleDaySummary(ctx: Context) {
 	const dateparam = ctx.req.param().date;
@@ -27,4 +32,12 @@ export async function HandleEndDevice(ctx: Context) {
 		return ctx.json(data, 200);
 	}
 	return ctx.json({ error: "Error fetching end device" }, 403);
+}
+
+export async function HandleLastData(ctx: Context) {
+	const data = await getLastData();
+	if (data) {
+		return ctx.json(data, 200);
+	}
+	return ctx.json({ error: "Error fetching day summary" }, 403);
 }

@@ -9,17 +9,3 @@ services:
       POSTGRES_DB: mydb
     ports:
       - "5432:5432"
-
-  nodejs:
-    image: node:latest
-    restart: always
-    ports:
-      - "8080:8080"
-    networks:
-      - mynetwork
-    depends_on:
-      - db
-
-networks:
-  mynetwork:
-    driver: bridge
