@@ -4,17 +4,11 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
 import { DataService } from "../../services/data.service";
-import {
-	ChartData,
-	EndDeviceSummary,
-	Incident,
-	MetricsSummary,
-} from "../../models";
+import { ChartData, EndDeviceSummary, Incident } from "../../models";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
-import { interval } from "rxjs";
 
 @Component({
-	selector: "app-noise",
+	selector: "app-temphumid-rt",
 	standalone: true,
 	imports: [
 		MatIconModule,
@@ -23,19 +17,20 @@ import { interval } from "rxjs";
 		MatDividerModule,
 		NgxChartsModule,
 	],
-	templateUrl: "./noise.component.html",
-	styleUrls: ["./noise.component.css"],
+	templateUrl: "./temphumid.rt.component.html",
+	styleUrls: ["./temphumid.rt.component.css"],
 })
-export class NoiseChartComponent {
+export class TempHumidRTComponent {
 	chartConstructor = "chart";
 	incidents: Incident[] | undefined;
-	view: [number, number] = [1700, 500];
+	view: [number, number] = [1700, 300];
 	legend = true;
 	legendPosition = "center";
 	math = Math;
 
-	chartData: ChartData[] = [];
-	sound: ChartData = { name: "humidity", series: [] };
+	humiditytData: ChartData[] = [];
+	temperaturetData: ChartData[] = [];
+	humidity: ChartData = { name: "humidity", series: [] };
 	temperature: ChartData = { name: "temperature", series: [] };
 
 	// options
@@ -46,12 +41,16 @@ export class NoiseChartComponent {
 	showYAxisLabel = true;
 	showXAxisLabel = false;
 	xAxisLabel = "Day";
-	yAxisLabel = "Value";
+	yAxisLabel = "Decibels (dB)";
 	timeline = true;
 
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	colorScheme: any = {
-		domain: ["orange", "darkblue"],
+		domain: ["darkblue"],
+	};
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	colorSchemeHumid: any = {
+		domain: ["darkgray"],
 	};
 
 	constructor(
@@ -59,8 +58,10 @@ export class NoiseChartComponent {
 		private cdr: ChangeDetectorRef,
 	) {
 		this.api.getLastDevices().subscribe((devices) => {
-			this.chartData = [];
-			this.sound.series = [];
+			this.humiditytData = [];
+			this.temperaturetData = [];
+			this.humidity.series = [];
+			this.temperature.series = [];
 			for (let i = 0; i < devices.length; i++) {
 				this.processData(devices[i], i);
 			}
@@ -68,7 +69,9 @@ export class NoiseChartComponent {
 		});
 	}
 	processData(e: EndDeviceSummary, i: number) {
-		this.sound.series.push({ name: i, value: e.sound });
-		this.chartData = [this.sound];
+		this.humidity.series.push({ name: i, value: e.humidity });
+		this.temperature.series.push({ name: i, value: e.temperature });
+		this.humiditytData = [this.humidity];
+		this.temperaturetData = [this.temperature];
 	}
 }

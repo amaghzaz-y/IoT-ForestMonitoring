@@ -63,12 +63,12 @@ export async function MockRealtime(): Promise<void> {
 		});
 		await prisma.metric.create({
 			data: {
-				temperature: Math.floor(Math.random() * 10 + 10),
-				humidity: Math.floor(Math.random() * 20 + 20),
-				sound: Math.floor(Math.random() * 40 + 30),
+				temperature: Math.floor(Math.random() * 6 + 10),
+				humidity: Math.floor(Math.random() * 11 + 20),
+				sound: Math.floor(Math.random() * 18 + 40),
 				movement: Boolean(Math.floor(Math.random() * 2)),
 				flame: Boolean(Math.floor(Math.random() * 2)),
-				lux: Math.floor(Math.random() * 300 + 200),
+				lux: Math.floor(Math.random() * 200 + 500),
 				date: date,
 				endDevice: {
 					connect: {

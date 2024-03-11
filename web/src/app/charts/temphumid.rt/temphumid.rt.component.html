@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Realtime Temperature and Humidity (last 50 data received)</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content
+    ><ngx-charts-line-chart
+      [view]="view"
+      [scheme]="colorScheme"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      yAxisLabel="Temperature Celsius"
+      [timeline]="true"
+      [results]="temperaturetData"
+      [autoScale]="true"
+    >
+    </ngx-charts-line-chart>
+    <ngx-charts-line-chart
+      [view]="view"
+      [scheme]="colorSchemeHumid"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      yAxisLabel="Humidity %"
+      [timeline]="true"
+      [results]="humiditytData"
+      [autoScale]="true"
+    >
+    </ngx-charts-line-chart>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+</mat-card>
