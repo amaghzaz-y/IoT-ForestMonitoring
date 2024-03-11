@@ -16,30 +16,47 @@ export class Payload {
 	private movement = false;
 	private sound = 0.0;
 	private emergency = false;
+	private canInsert = false;
 
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	constructor(raw: any) {
-		this.EUI = raw.end_device_ids.device_id;
-		this.devEUI = raw.end_device_ids.dev_eui;
-		this.receivedAt = raw.received_at;
-		this.content = raw.uplink_message.decoded_payload.raw.toString();
-		this.getValues(raw.uplink_message.decoded_payload);
-		console.log(this.content);
+		try {
+			if (raw.uplink_message.decoded_payload !== undefined) {
+				this.EUI = raw.end_device_ids.device_id;
+				this.devEUI = raw.end_device_ids.dev_eui;
+				this.receivedAt = raw.received_at;
+				this.content = JSON.stringify(raw.uplink_message);
+				this.getValues(raw.uplink_message.decoded_payload);
+				console.log("payload: ", raw.uplink_message.decoded_payload);
+				this.canInsert = true;
+			}
+		} catch (e) {
+			console.log("error decoded_payload");
+		}
 	}
 
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	private getValues(decoded_payload: any) {
-		this.humidity = decoded_payload.humidity;
-		this.temperature = decoded_payload.temperature;
-		this.lux = decoded_payload.lux;
-		this.sound = decoded_payload.sound;
-		this.movement = decoded_payload.movement === 0 ? false : true;
-		this.flame = decoded_payload.flame === 0 ? false : true;
-		this.emergency = decoded_payload.emergency === 0 ? false : true;
-		console.log(this.emergency);
+		this.humidity = decoded_payload.result.h ?? 0;
+		this.temperature = decoded_payload.result.t ?? 0;
+		this.lux = decoded_payload.result.lux ?? 0;
+		this.sound = decoded_payload.result.s ?? 0;
+		this.movement = decoded_payload.result.m === 0 ? false : true;
+		this.flame = decoded_payload.result.f === 0 ? false : true;
+		this.emergency = decoded_payload.result.e === 0 ? false : true;
+		// console.log(
+		// 	this.humidity,
+		// 	this.temperature,
+		// 	this.lux,
+		// 	this.sound,
+		// 	this.movement,
+		// 	this.flame,
+		// 	this.emergency,
+		// );
 	}
 
 	async SaveToDatabase() {
+		if (!this.canInsert) return;
 		await this.insertDevice();
 		await this.insertMessage();
 		await this.insertMetric();
@@ -69,7 +86,7 @@ export class Payload {
 			.create({
 				data: {
 					eui: this.EUI,
-					payload: this.content,
+					payload: JSON.stringify(this.content),
 					date: new Date().toISOString(),
 				},
 			})

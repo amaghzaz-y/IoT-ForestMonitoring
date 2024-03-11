@@ -10,8 +10,10 @@ import {
 	HandleLastData,
 } from "./api";
 import { cors } from "hono/cors";
-import { MockRealtime, addDataToDatabase } from "./add_data";
+import { MockRealtime } from "./add_data";
 import { logger } from "hono/logger";
+
+// setInterval(MockRealtime, 2000);
 
 const app = new Hono();
 const client = mqtt.connect("mqtt://eu1.cloud.thethings.network:1883", {
@@ -30,8 +32,6 @@ client.on("connect", () => {
 		console.log("connected successfully to MQTT !");
 	});
 });
-
-setInterval(MockRealtime, 2000);
 
 client.on("message", async (topic, message) => {
 	const raw = JSON.parse(message.toString());

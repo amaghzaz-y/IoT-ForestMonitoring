@@ -20,15 +20,29 @@ void Lora::begin() {
   Serial.println(modem.version());
   Serial.print("Device EUI is: ");
   Serial.println(modem.deviceEUI());
-  modem.minPollInterval(10);
+  modem.minPollInterval(5);
 }
 
 void Lora::send(int *data) {
+  digitalWrite(PIN_LED_GREEN, HIGH);
+  JsonDocument doc;
+  doc["t"] = data[0];
+  doc["h"] = data[1];
+  doc["f"] = data[2];
+  doc["l"] = data[3];
+  doc["m"] = data[4];
+  doc["s"] = data[5];
+  doc["e"] = data[6];
+  String output;
+  serializeJson(doc, output);
   modem.beginPacket();
-  modem.write(data);
+  modem.print(output);
   if (!modem.endPacket(true))
     Serial.println("failed to send data");
   modem.flush();
+  doc.clear();
+  output.~String();
+  digitalWrite(PIN_LED_GREEN, LOW);
 }
 
 void Lora::receive() {

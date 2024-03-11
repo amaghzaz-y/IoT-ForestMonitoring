@@ -57,14 +57,14 @@ int *Sensors::getDevData() {
   data[0] = random(10, 15);
   data[1] = random(20, 40);
   data[2] = random(0, 1);
-  data[3] = random(0, 1000);
+  data[3] = random(500, 700);
   data[4] = random(0, 2);
-  data[5] = random(0, 1000);
+  data[5] = random(30, 50);
   data[6] = !digitalRead(PIN_BUTTON);
   if (data[6]) {
-    digitalWrite(PIN_LED_GREEN, HIGH);
+    digitalWrite(PIN_LED_BLUE, HIGH);
     delay(400);
-    digitalWrite(PIN_LED_GREEN, LOW);
+    digitalWrite(PIN_LED_BLUE, LOW);
   }
   // debug print
   if (false) {
@@ -84,3 +84,5 @@ int *Sensors::getDevData() {
   }
   return data;
 }
+
+bool Sensors::isEmergency() { return data[6]; }

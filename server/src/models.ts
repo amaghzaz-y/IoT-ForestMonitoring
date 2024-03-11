@@ -102,12 +102,7 @@ export async function getEndDevice(
 
 export async function getAllIncidents(): Promise<Incident[] | null> {
 	try {
-		const emergencySignals = await prisma.emergencySignal.findMany({
-			where: {
-				date: new Date().toISOString(),
-			},
-		});
-
+		const emergencySignals = await prisma.emergencySignal.findMany();
 		const incidents: Incident[] = emergencySignals.map((signal) => ({
 			id: signal.id,
 			eui: signal.eui,

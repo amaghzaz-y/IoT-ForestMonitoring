@@ -17,6 +17,7 @@ public:
   void update();
   int *getData();
   int *getDevData();
+  bool isEmergency();
 
 private:
   void readSensorFlame();
