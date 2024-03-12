@@ -55,9 +55,17 @@ export class IncidentsComponent {
 }
 
 @Component({
-	selector: "dialog-content-example-dialog",
-	templateUrl: "dialog.html",
+	selector: "dialog-comp",
 	standalone: true,
-	imports: [MatDialogModule, MatButtonModule],
+	imports: [
+		MatIconModule,
+		MatButtonModule,
+		MatCardModule,
+		MatDividerModule,
+		MatButtonModule,
+		MatDialogModule,
+	],
+	styleUrls: ["./dialog.css"],
+	templateUrl: "dialog.html",
 })
 export class Dialog {}
