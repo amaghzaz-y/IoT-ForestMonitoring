@@ -5,7 +5,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { DataService } from "../../services/data.service";
 import { Incident, MetricsSummary } from "../../models";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
-import { Observable, interval, map } from "rxjs";
+import { Observable, interval, last, map } from "rxjs";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
 @Component({
@@ -26,8 +26,8 @@ import { MatButtonModule } from "@angular/material/button";
 export class IncidentsComponent {
 	incidents: Incident[] | undefined;
 	view: [number, number] = [500, 400];
+	lastlength = 0;
 	math = Math;
-	opened = false;
 	@Input() public chartData$: Observable<[]> = new Observable();
 
 	constructor(
@@ -35,15 +35,14 @@ export class IncidentsComponent {
 		private cdr: ChangeDetectorRef,
 		public dialog: MatDialog,
 	) {
-		api.getAllIncidents().subscribe((data) => {
-			console.log("incidents", data);
-			this.incidents = data;
-			if (this.incidents.length > 0) {
-				if (!this.opened) {
-					this.opened = true;
+		interval(2000).subscribe(() => {
+			api.getAllIncidents().subscribe((data) => {
+				this.incidents = data;
+				if (this.incidents.length > this.lastlength) {
 					this.openDialog();
+					this.lastlength = this.incidents.length;
 				}
-			}
+			});
 		});
 	}
 	openDialog() {
