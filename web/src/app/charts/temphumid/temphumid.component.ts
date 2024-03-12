@@ -23,7 +23,7 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
 export class TempHumidComponent {
 	chartConstructor = "chart";
 	incidents: Incident[] | undefined;
-	view: [number, number] = [1700, 500];
+	view: [number, number] = [1700, 350];
 	legend = true;
 	legendPosition = "center";
 	math = Math;
@@ -40,7 +40,7 @@ export class TempHumidComponent {
 	showYAxisLabel = true;
 	showXAxisLabel = true;
 	xAxisLabel = "Day";
-	yAxisLabel = "Value";
+	yAxisLabel = "C (temp), % (humidity)";
 	timeline = false;
 
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>

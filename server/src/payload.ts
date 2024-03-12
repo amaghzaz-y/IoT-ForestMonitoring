@@ -21,15 +21,13 @@ export class Payload {
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	constructor(raw: any) {
 		try {
-			if (raw.uplink_message.decoded_payload !== undefined) {
-				this.EUI = raw.end_device_ids.device_id;
-				this.devEUI = raw.end_device_ids.dev_eui;
-				this.receivedAt = raw.received_at;
-				this.content = JSON.stringify(raw.uplink_message);
-				this.getValues(raw.uplink_message.decoded_payload);
-				console.log("payload: ", raw.uplink_message.decoded_payload);
-				this.canInsert = true;
-			}
+			this.EUI = raw.end_device_ids.device_id;
+			this.devEUI = raw.end_device_ids.dev_eui;
+			this.receivedAt = raw.received_at;
+			this.content = JSON.stringify(raw.uplink_message);
+			this.getValues(raw.uplink_message.decoded_payload);
+			console.log("payload: ", raw.uplink_message.decoded_payload);
+			this.canInsert = true;
 		} catch (e) {
 			console.log("error decoded_payload");
 		}
@@ -44,15 +42,6 @@ export class Payload {
 		this.movement = decoded_payload.result.m === 0 ? false : true;
 		this.flame = decoded_payload.result.f === 0 ? false : true;
 		this.emergency = decoded_payload.result.e === 0 ? false : true;
-		// console.log(
-		// 	this.humidity,
-		// 	this.temperature,
-		// 	this.lux,
-		// 	this.sound,
-		// 	this.movement,
-		// 	this.flame,
-		// 	this.emergency,
-		// );
 	}
 
 	async SaveToDatabase() {

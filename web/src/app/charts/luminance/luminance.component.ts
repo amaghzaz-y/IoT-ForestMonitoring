@@ -23,7 +23,7 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
 export class LuminanceComponent {
 	chartConstructor = "chart";
 	incidents: Incident[] | undefined;
-	view: [number, number] = [1700, 500];
+	view: [number, number] = [1700, 350];
 	legend = true;
 	legendPosition = "center";
 	math = Math;
@@ -44,7 +44,7 @@ export class LuminanceComponent {
 	showYAxisLabel = true;
 	showXAxisLabel = true;
 	xAxisLabel = "Day";
-	yAxisLabel = "Value";
+	yAxisLabel = "Lux";
 	timeline = true;
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	colorScheme: any = {

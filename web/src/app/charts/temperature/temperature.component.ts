@@ -20,10 +20,10 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
 	styleUrls: ["./temperature.component.css"],
 })
 export class TemperatureComponent {
-	chartConstructor: string = "chart";
+	chartConstructor = "chart";
 	view: [number, number] = [500, 400];
-	legend: boolean = true;
-	legendPosition: any = "center";
+	legend = true;
+	legendPosition = "center";
 	colorScheme: any = {
 		domain: ["#28B67E"],
 	};

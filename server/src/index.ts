@@ -10,10 +10,11 @@ import {
 	HandleLastData,
 } from "./api";
 import { cors } from "hono/cors";
-import { MockRealtime } from "./add_data";
+import { MockRealtime, addDataToDatabase } from "./add_data";
 import { logger } from "hono/logger";
 
-// setInterval(MockRealtime, 2000);
+addDataToDatabase();
+setInterval(MockRealtime, 2000);
 
 const app = new Hono();
 const client = mqtt.connect("mqtt://eu1.cloud.thethings.network:1883", {

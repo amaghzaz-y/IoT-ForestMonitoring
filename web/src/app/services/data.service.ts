@@ -11,7 +11,7 @@ import {
 
 @Injectable({ providedIn: "root" })
 export class DataService {
-	url = "http://localhost:8080/api";
+	url = "http://10.114.11.21:8080/api";
 	private metricsSubject = new BehaviorSubject<MetricsSummary>(
 		{} as MetricsSummary,
 	);

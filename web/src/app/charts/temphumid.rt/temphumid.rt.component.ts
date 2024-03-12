@@ -22,12 +22,10 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
 })
 export class TempHumidRTComponent {
 	chartConstructor = "chart";
-	incidents: Incident[] | undefined;
 	view: [number, number] = [1700, 300];
 	legend = true;
 	legendPosition = "center";
 	math = Math;
-
 	humiditytData: ChartData[] = [];
 	temperaturetData: ChartData[] = [];
 	humidity: ChartData = { name: "humidity", series: [] };
@@ -65,7 +63,6 @@ export class TempHumidRTComponent {
 			for (let i = 0; i < devices.length; i++) {
 				this.processData(devices[i], i);
 			}
-			console.log("updated");
 		});
 	}
 	processData(e: EndDeviceSummary, i: number) {

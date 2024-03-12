@@ -29,7 +29,7 @@ import { interval } from "rxjs";
 export class NoiseChartComponent {
 	chartConstructor = "chart";
 	incidents: Incident[] | undefined;
-	view: [number, number] = [1700, 500];
+	view: [number, number] = [1700, 300];
 	legend = true;
 	legendPosition = "center";
 	math = Math;
