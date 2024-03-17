@@ -5,7 +5,8 @@
 Sensors sensors;
 Lora lora;
 unsigned long previousMillis = 0;
-const unsigned long interval = 5 * 60 * 1000;
+const unsigned long interval = 5 * 60 * 1000; // 5 seconds
+
 void setup() {
   if (true)
     Serial.begin(9600);
@@ -16,14 +17,11 @@ void setup() {
 void loop() {
   unsigned long currentMillis = millis();
   sensors.update();
-  delay(1000);
   if (!sensors.isEmergency()) {
-    Serial.println("emergency");
-    lora.send(sensors.getDevData());
+    lora.send(sensors.getData());
   }
   if (currentMillis - previousMillis >= interval) {
-    Serial.println("interval");
-    lora.send(sensors.getDevData());
+    lora.send(sensors.getData());
     previousMillis = currentMillis;
   }
 }
